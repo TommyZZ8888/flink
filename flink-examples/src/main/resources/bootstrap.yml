@@ -1,0 +1,16 @@
+spring:
+    application:
+        name: austin
+    cloud:
+        nacos:
+            config:
+                server-addr: 127.0.0.1
+                username: austin
+                password: austin
+                namespace: ${spring.profiles.active}
+                file-extension: yaml
+                extension-configs:
+                    - dataId: ${spring.profiles.active}
+                      group: ${spring.profiles.active}
+                      refresh: true
+

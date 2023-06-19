@@ -2,6 +2,8 @@ package com.www.flinkstart.flinkexample.loaddata.mysql;
 
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +16,9 @@ import java.sql.ResultSet;
  * @Date Created on 2023/6/1
  */
 public class MySqlSource extends RichParallelSourceFunction<SourceTest> {
+
+    Logger logger = LoggerFactory.getLogger(MySqlSource.class);
+
     Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -26,12 +31,13 @@ public class MySqlSource extends RichParallelSourceFunction<SourceTest> {
         while (flag) {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                long money = resultSet.getLong("money");
-                String sex = resultSet.getString("sex");
-                SourceTest sourceTest = SourceTest.builder().money(money).sex(sex).build();
-                sourceContext.collect(sourceTest);
+                logger.info("用户ID={},name={},age={},likes={},address={}",
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("likes"),
+                        resultSet.getString("address"));
             }
-            Thread.sleep(2000);
         }
     }
 

@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>flink-start</module>
+        <module>flink-examples</module>
     </modules>
     <properties>
         <encoding>UTF-8</encoding>

@@ -33,7 +33,9 @@ public class CountWindowDemo {
 //        WindowedStream<User, String, GlobalWindow> windowedStream = source.keyBy(User::getUsername).countWindow(2);
 //        SingleOutputStreamOperator<Object> apply = windowedStream.apply(new SpeedAlarmWindow());
 //        apply.print();
-        SingleOutputStreamOperator<Object> apply1 = source.keyBy(User::getUsername).countWindow(2, 2).apply(new SpeedAlarmWindow());
+        SingleOutputStreamOperator<Object> apply1 = source.keyBy(User::getUsername)
+                .countWindow(2, 2)
+                .apply(new SpeedAlarmWindow());
         apply1.print();
 
         env.execute();

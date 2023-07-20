@@ -1,0 +1,8 @@
+spring:
+    application:
+        name: sbhbase
+server:
+    port: 9090
+hbase:
+    zookeeper:
+        quorum: localhost:2182

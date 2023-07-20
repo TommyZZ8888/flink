@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration>
+ <!--   指定hbase是文件存储路径
+       1、使用本地路径
+       file:///D:/Apache/hadoop/hbase-2.1.0/root
+       2、使用hdfs
+       hdfs://localhost:9000/hbase
+       使用hdfs集群要把hadoop的hdfs-site.xml和core-site.xml 放到hbase/conf下
+       如果hdfs是集群，可以配成hdfs://集群名/hbase  如：
+       hdfs://ns1/hbase
+-->
+    <property>
+        <name>hbase.rootdir</name>
+        <value>file:///D:/environment/hbase/hbase-2.1.6/root</value>
+    </property>
+    <property>
+        <name>hbase.tmp.dir</name>
+        <value>D:/environment/hbase/hbase-2.1.6/tmp</value>
+    </property>
+<!-- //2.配置内置zk地址 -->
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>localhost</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.property.clientPort</name>
+        <value>2182</value>
+    </property>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://localhost:9000/hbase</value>
+    </property>
+
+<!-- //3.配置zk数据存放地址 -->
+    <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>D:/environment/hbase/hbase-2.1.6/zoo</value>
+    </property>
+
+<!-- //4.配置启用集群分布式运行 -->
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>false</value>
+    </property>
+</configuration>

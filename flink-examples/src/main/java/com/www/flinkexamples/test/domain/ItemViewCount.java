@@ -1,4 +1,4 @@
-package com.www.flinkexamples.domain;
+package com.www.flinkexamples.test.domain;
 
 
 public class ItemViewCount {

@@ -1,6 +1,6 @@
-package com.www.flinkexamples.service;
+package com.www.flinkexamples.test.service;
 
-import com.www.flinkexamples.domain.UserBehavior;
+import com.www.flinkexamples.test.domain.UserBehavior;
 import org.apache.flink.api.common.functions.AggregateFunction;
 
 

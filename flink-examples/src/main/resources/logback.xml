@@ -187,7 +187,7 @@
     <!--root节点的level是总的日志级别控制,如果appender的日志级别设定比root的高,会按照appender的日志级别打印日志,-->
     <!--如果appender的日志级别比root的低,会按照root设定的日志级别进行打印日志-->
     <!--也就是说root设定的日志级别是最低限制,如果root设定级别为最高ERROR,那么所有appender只能打印最高级别的日志-->
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="DEBUG_FILE"/>
         <appender-ref ref="INFO_FILE"/>

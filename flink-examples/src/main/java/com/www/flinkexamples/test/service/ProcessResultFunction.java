@@ -1,6 +1,6 @@
-package com.www.flinkexamples.service;
+package com.www.flinkexamples.test.service;
 
-import com.www.flinkexamples.domain.ItemViewCount;
+import com.www.flinkexamples.test.domain.ItemViewCount;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.state.ListState;
 import org.apache.flink.api.common.state.ListStateDescriptor;

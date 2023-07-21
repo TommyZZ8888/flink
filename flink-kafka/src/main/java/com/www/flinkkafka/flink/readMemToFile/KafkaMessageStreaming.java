@@ -1,8 +1,11 @@
 package com.www.flinkkafka.flink.readMemToFile;
 
+import org.apache.flink.api.common.ExecutionConfig;
+import org.apache.flink.api.common.eventtime.*;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.metrics.MetricGroup;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -12,6 +15,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.util.Collector;
 
+import java.time.Duration;
 import java.util.Properties;
 
 /**
@@ -30,12 +34,20 @@ public class KafkaMessageStreaming {
         props.setProperty("group.id", "flink");
 
         FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("topic001", new SimpleStringSchema(), props);
-        consumer.assignTimestampsAndWatermarks(new MessageWaterEmitter());
+//        consumer.assignTimestampsAndWatermarks(new MessageWaterEmitter());
+        consumer.assignTimestampsAndWatermarks(WatermarkStrategy.<String>forBoundedOutOfOrderness(Duration.ofSeconds(3))
+                .withTimestampAssigner((element,timestamp)->{
+                    if (element != null && element.contains(",")) {
+                        String[] parts = element.split(",");
+                        return Long.parseLong(parts[0]);
+                    }
+                    return 0L;
+                }));
 
         SingleOutputStreamOperator<Tuple2<String, Long>> keyedStream = env.addSource(consumer)
                 .flatMap(new MessageSplitter())
                 .keyBy(0)
-                .timeWindow(Time.seconds(2))
+                .timeWindow(Time.seconds(1))
                 .apply(new WindowFunction<Tuple2<String, Long>, Tuple2<String, Long>, Tuple, TimeWindow>() {
                     @Override
                     public void apply(Tuple tuple, TimeWindow window, Iterable<Tuple2<String, Long>> input, Collector<Tuple2<String, Long>> out) throws Exception {

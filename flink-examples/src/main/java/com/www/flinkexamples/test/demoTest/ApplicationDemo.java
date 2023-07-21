@@ -1,22 +1,19 @@
-package com.www.flinkexamples.demoTest;
+package com.www.flinkexamples.test.demoTest;
 
 
-import com.www.flinkexamples.domain.ItemViewCount;
-import com.www.flinkexamples.domain.UserBehavior;
-import com.www.flinkexamples.service.CountAgg;
-import com.www.flinkexamples.service.ProcessResultFunction;
-import com.www.flinkexamples.service.WindowResultFunction;
+import com.www.flinkexamples.test.domain.ItemViewCount;
+import com.www.flinkexamples.test.domain.UserBehavior;
+import com.www.flinkexamples.test.service.CountAgg;
+import com.www.flinkexamples.test.service.ProcessResultFunction;
+import com.www.flinkexamples.test.service.WindowResultFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExtractor;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 

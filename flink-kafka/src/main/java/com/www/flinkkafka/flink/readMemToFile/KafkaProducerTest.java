@@ -40,7 +40,7 @@ public class KafkaProducerTest {
     }
 
     private static long currentMemSize() {
-        return MemoryUsageExtrator.currentFreeMemorySizeInBytes();
+        return MemoryUsageExtractor.currentFreeMemorySizeInBytes();
     }
 
 }
